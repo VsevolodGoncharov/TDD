@@ -1,6 +1,43 @@
 from selenium import webdriver
+import unittest
 
-browser = webdriver.Firefox()
-browser.get('http://localhost:8000')
 
-assert 'The install worked successfully! Congratulations!' in browser.title
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_can_start_a_list_and_retrieve_it_later(self):
+        # Маруся слышала про крутое новое приложение со списком неотложных дел.
+        # Она решает оценить его домашнюю страницу
+        self.browser.get('http://localhost:8000')
+
+        # Она видит, что заголовок и шапка страницы говорят о списках неотложных дел
+        self.assertIn('To-Do', self.browser.title)
+        self.fail('Закончить тест!')
+
+        # Ей сразу же предлагается ввести элемент списка
+
+        # Она набирает в текстовом поле "Прополоть репу"
+
+        # Когда она нажимает enter, страница обновляется,
+        # и теперь страница содержит "1: Прополоть репу" в качестве элемента списка
+
+        # Текстовое поле по-прежнему приглашает её добавить ещё один элемент.
+        # Она вводит "Помыть кобылу"
+
+        # Страница снова обновляется, и теперь показывает оба элемента
+
+        # Марусе интересно, запомнит ли сайт её список дел.
+        # Далее она видит, что сайт сгенерировал для неё уникальный URL-адрес
+        # об этом выводится небольшой текст с объяснениями
+
+        # Она посещает этот URL-адрес - её список по-прежнему там
+
+        # Удовлетворенная, она снова едёт месить тесто
+
+
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
